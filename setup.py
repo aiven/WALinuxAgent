@@ -78,12 +78,12 @@ def get_data_files(name, version, fullname):
     """
     data_files = []
 
-    if name == 'redhat' or name == 'centos':
+    if name in ('redhat', 'centos', 'fedora'):
         set_bin_files(data_files)
         set_conf_files(data_files)
         set_logrotate_files(data_files)
         set_udev_files(data_files)
-        if version.startswith("6"):
+        if name != 'fedora' and version.startswith("6"):
             set_sysv_files(data_files)
         else:
             # redhat7.0+ use systemd

@@ -78,15 +78,16 @@ def get_osutil(distro_name=DISTRO_NAME,
     elif distro_name == "debian":
         return DebianOSUtil()
 
-    elif distro_name == "redhat" \
-            or distro_name == "centos" \
-            or distro_name == "oracle":
-        if Version(distro_version) < Version("7"):
+    elif distro_name in ("redhat", "centos", "oracle", "fedora"):
+        if distro_name != "fedora" and Version(distro_version) < Version("7"):
             return Redhat6xOSUtil()
         else:
             return RedhatOSUtil()
 
     elif distro_name == "euleros":
+        return RedhatOSUtil()
+
+    elif distro_name == "fedora":
         return RedhatOSUtil()
 
     elif distro_name == "freebsd":
